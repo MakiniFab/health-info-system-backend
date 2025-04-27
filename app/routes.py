@@ -77,6 +77,14 @@ def create_program():
     db.session.commit()
     return jsonify({"message": "Program created"}), 201
 
+# List all programs
+@main.route('/programs', methods=['GET'])
+@jwt_required()
+def list_programs():
+    programs = Program.query.all()
+    result = [{"id": p.id, "name": p.name} for p in programs]
+    return jsonify(result)
+
 # Enroll a client into a program
 @main.route('/enroll', methods=['POST'])
 @jwt_required()
