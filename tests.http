@@ -1,0 +1,72 @@
+### 1. Register a Doctor
+POST http://127.0.0.1:5000/register
+Content-Type: application/json
+
+{
+  "username": "doctor1",
+  "password": "password123"
+}
+
+### 2. Login Doctor
+POST http://127.0.0.1:5000/login
+Content-Type: application/json
+
+{
+  "username": "doctor1",
+  "password": "password123"
+}
+
+### 3. Create Program
+POST http://127.0.0.1:5000/programs
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NTY2Mjc0NiwianRpIjoiYmU1ODJmMzYtOTk4NC00MDMwLTk3MmUtN2YwYTMyYTYzN2QzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImRvY3RvcjEiLCJuYmYiOjE3NDU2NjI3NDYsImNzcmYiOiJkYTkyNWY0YS02NGRkLTRjZjAtODg0NS0wNDVjMjQ4ZmYyNmYiLCJleHAiOjE3NDU2NjM2NDZ9.gCMjUz16HEb9rfMAprWcrjxxJkI93BTKy6O1uF1ffus
+
+{
+  "name": "HIV Program"
+}
+
+### 4. Create Client
+POST http://127.0.0.1:5000/clients
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NTY5ODk4NCwianRpIjoiZTAxMmZjNjktNmUxMy00ODc5LTg1ZjgtM2MwNzg5NTNkNTJkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImRvY3RvcjEiLCJuYmYiOjE3NDU2OTg5ODQsImNzcmYiOiI1OWQxY2Y0OS1lZjQzLTQ0ZjQtYTNjZC1kMjVkMmQzYzY1NDEiLCJleHAiOjE3NDU2OTk4ODR9.DiQByIzvZwQ24supDs6MkSvlbKssDH97fXn9LYiSUpk
+
+{
+  "name": "John Doe",
+  "age": 32
+}
+
+### 5. List Clients
+GET http://127.0.0.1:5000/clients
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NTY5ODk4NCwianRpIjoiZTAxMmZjNjktNmUxMy00ODc5LTg1ZjgtM2MwNzg5NTNkNTJkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImRvY3RvcjEiLCJuYmYiOjE3NDU2OTg5ODQsImNzcmYiOiI1OWQxY2Y0OS1lZjQzLTQ0ZjQtYTNjZC1kMjVkMmQzYzY1NDEiLCJleHAiOjE3NDU2OTk4ODR9.DiQByIzvZwQ24supDs6MkSvlbKssDH97fXn9LYiSUpk
+
+### 6. Enroll Client
+POST http://127.0.0.1:5000/enroll
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NTY5ODk4NCwianRpIjoiZTAxMmZjNjktNmUxMy00ODc5LTg1ZjgtM2MwNzg5NTNkNTJkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImRvY3RvcjEiLCJuYmYiOjE3NDU2OTg5ODQsImNzcmYiOiI1OWQxY2Y0OS1lZjQzLTQ0ZjQtYTNjZC1kMjVkMmQzYzY1NDEiLCJleHAiOjE3NDU2OTk4ODR9.DiQByIzvZwQ24supDs6MkSvlbKssDH97fXn9LYiSUpk
+
+{
+  "client_id": 1,
+  "program_id": 1
+}
+
+### 7. View Client Profile
+GET http://127.0.0.1:5000/clients/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NTY5ODk4NCwianRpIjoiZTAxMmZjNjktNmUxMy00ODc5LTg1ZjgtM2MwNzg5NTNkNTJkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImRvY3RvcjEiLCJuYmYiOjE3NDU2OTg5ODQsImNzcmYiOiI1OWQxY2Y0OS1lZjQzLTQ0ZjQtYTNjZC1kMjVkMmQzYzY1NDEiLCJleHAiOjE3NDU2OTk4ODR9.DiQByIzvZwQ24supDs6MkSvlbKssDH97fXn9LYiSUpk
+
+### 8. Add Outcome
+POST http://127.0.0.1:5000/outcomes
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NTY5ODk4NCwianRpIjoiZTAxMmZjNjktNmUxMy00ODc5LTg1ZjgtM2MwNzg5NTNkNTJkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImRvY3RvcjEiLCJuYmYiOjE3NDU2OTg5ODQsImNzcmYiOiI1OWQxY2Y0OS1lZjQzLTQ0ZjQtYTNjZC1kMjVkMmQzYzY1NDEiLCJleHAiOjE3NDU2OTk4ODR9.DiQByIzvZwQ24supDs6MkSvlbKssDH97fXn9LYiSUpk
+
+
+{
+  "client_id": 1,
+  "program_id": 1,
+  "outcome": "Completed treatment",
+  "notes": "Patient has fully recovered."
+}
+
+### Get Activity Logs
+GET http://localhost:5000/logs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NTY5ODk4NCwianRpIjoiZTAxMmZjNjktNmUxMy00ODc5LTg1ZjgtM2MwNzg5NTNkNTJkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImRvY3RvcjEiLCJuYmYiOjE3NDU2OTg5ODQsImNzcmYiOiI1OWQxY2Y0OS1lZjQzLTQ0ZjQtYTNjZC1kMjVkMmQzYzY1NDEiLCJleHAiOjE3NDU2OTk4ODR9.DiQByIzvZwQ24supDs6MkSvlbKssDH97fXn9LYiSUpk
+Content-Type: application/json
