@@ -11,8 +11,10 @@ client_program = db.Table('client_program',
 # User model for authentication
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True)  # Username must be unique
-    password_hash = db.Column(db.String(200))  # Hashed password for security
+    first_name = db.Column(db.String(80), nullable=False)
+    last_name = db.Column(db.String(80), nullable=False)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    password_hash = db.Column(db.String(200), nullable=False)
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -23,15 +25,18 @@ class User(db.Model):
 # Client model to store client information
 class Client(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100))
-    age = db.Column(db.Integer)
+    first_name = db.Column(db.String(100), nullable=False)
+    last_name = db.Column(db.String(100), nullable=False)
+    age = db.Column(db.Integer, nullable=False)
+    huduma_number = db.Column(db.String(50), unique=True, nullable=False)  # Huduma Number must be unique
     programs = db.relationship('Program', secondary=client_program, backref='clients')
     outcomes = db.relationship('ProgramOutcome', backref='client', lazy=True)
 
 # Program model to define different programs
 class Program(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), unique=True)
+    name = db.Column(db.String(100), unique=True, nullable=False)
+    description = db.Column(db.Text, nullable=True)  # Optional description field
     outcomes = db.relationship('ProgramOutcome', backref='program', lazy=True)
 
 # ProgramOutcome model to track client progress in programs
@@ -45,6 +50,6 @@ class ProgramOutcome(db.Model):
 # ActivityLog model to log doctor actions (e.g., client registration, program enrollment)
 class ActivityLog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    doctor_username = db.Column(db.String(80))
-    action = db.Column(db.String(255))
+    doctor_username = db.Column(db.String(80), nullable=False)
+    action = db.Column(db.String(255), nullable=False)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)

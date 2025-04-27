@@ -11,11 +11,15 @@ main = Blueprint('main', __name__)
 @main.route('/register', methods=['POST'])
 def register():
     data = request.get_json()
-    user = User(username=data['username'])
+    user = User(
+        first_name=data['first_name'],
+        last_name=data['last_name'],
+        username=data['username']
+    )
     user.set_password(data['password'])
     db.session.add(user)
     db.session.commit()
-    return jsonify({"message": "User registered"}), 201
+    return jsonify({"message": "User registered successfully"}), 201
 
 # Login user and generate JWT token
 @main.route('/login', methods=['POST'])
@@ -33,23 +37,40 @@ def login():
 @jwt_required()
 def create_client():
     data = request.get_json()
-    client = Client(name=data['name'], age=data['age'])
+    client = Client(
+        first_name=data['first_name'],
+        last_name=data['last_name'],
+        age=data['age'],
+        huduma_number=data['huduma_number']
+    )
     db.session.add(client)
     db.session.commit()
 
     # Log the client registration
-    log = ActivityLog(doctor_username=get_jwt_identity(), action=f"Registered client {client.name}")
+    log = ActivityLog(
+        doctor_username=get_jwt_identity(),
+        action=f"Registered client {client.first_name} {client.last_name}"
+    )
     db.session.add(log)
     db.session.commit()
 
-    return jsonify({"message": "Client registered"}), 201
+    return jsonify({"message": "Client registered successfully"}), 201
 
 # List all clients
 @main.route('/clients', methods=['GET'])
 @jwt_required()
 def list_clients():
     clients = Client.query.all()
-    result = [{"id": c.id, "name": c.name, "age": c.age} for c in clients]
+    result = [
+        {
+            "id": c.id,
+            "first_name": c.first_name,
+            "last_name": c.last_name,
+            "age": c.age,
+            "huduma_number": c.huduma_number
+        }
+        for c in clients
+    ]
     return jsonify(result)
 
 # Retrieve a specific client by ID
@@ -58,10 +79,19 @@ def list_clients():
 def get_client(id):
     client = Client.query.get_or_404(id)
     enrolled_programs = [p.name for p in client.programs]
-    outcomes = [{"program": o.program.name, "outcome": o.outcome, "notes": o.notes} for o in client.outcomes]
+    outcomes = [
+        {
+            "program": o.program.name,
+            "outcome": o.outcome,
+            "notes": o.notes
+        }
+        for o in client.outcomes
+    ]
     return jsonify({
-        "name": client.name,
+        "first_name": client.first_name,
+        "last_name": client.last_name,
         "age": client.age,
+        "huduma_number": client.huduma_number,
         "programs": enrolled_programs,
         "outcomes": outcomes
     })
@@ -72,17 +102,27 @@ def get_client(id):
 @jwt_required()
 def create_program():
     data = request.get_json()
-    program = Program(name=data['name'])
+    program = Program(
+        name=data['name'],
+        description=data.get('description', '')
+    )
     db.session.add(program)
     db.session.commit()
-    return jsonify({"message": "Program created"}), 201
+    return jsonify({"message": "Program created successfully"}), 201
 
 # List all programs
 @main.route('/programs', methods=['GET'])
 @jwt_required()
 def list_programs():
     programs = Program.query.all()
-    result = [{"id": p.id, "name": p.name} for p in programs]
+    result = [
+        {
+            "id": p.id,
+            "name": p.name,
+            "description": p.description
+        }
+        for p in programs
+    ]
     return jsonify(result)
 
 # Enroll a client into a program
@@ -96,11 +136,14 @@ def enroll_client():
     db.session.commit()
 
     # Log the enrollment
-    log = ActivityLog(doctor_username=get_jwt_identity(), action=f"Enrolled {client.name} in {program.name}")
+    log = ActivityLog(
+        doctor_username=get_jwt_identity(),
+        action=f"Enrolled {client.first_name} {client.last_name} in {program.name}"
+    )
     db.session.add(log)
     db.session.commit()
 
-    return jsonify({"message": f"{client.name} enrolled in {program.name}"}), 200
+    return jsonify({"message": f"{client.first_name} {client.last_name} enrolled in {program.name}"}), 200
 
 # OUTCOME
 # Add an outcome for a client in a program
@@ -116,20 +159,21 @@ def add_outcome():
     )
     db.session.add(outcome)
 
-    # Log the outcome update
     client = Client.query.get(data['client_id'])
     program = Program.query.get(data['program_id'])
+
+    # Log the outcome update
     log = ActivityLog(
         doctor_username=get_jwt_identity(),
-        action=f"Updated outcome for {client.name} in {program.name}"
+        action=f"Added outcome for {client.first_name} {client.last_name} in {program.name}"
     )
     db.session.add(log)
     db.session.commit()
 
-    return jsonify({"message": "Outcome recorded"}), 201
+    return jsonify({"message": "Outcome recorded successfully"}), 201
 
 # ACTIVITY LOG
-# View all activity logs (doctor actions)
+# View all activity logs
 @main.route('/logs', methods=['GET'])
 @jwt_required()
 def get_logs():

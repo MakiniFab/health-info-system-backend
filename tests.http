@@ -1,72 +1,95 @@
-### 1. Register a Doctor
-POST http://127.0.0.1:5000/register
+### Register a new user
+POST http://localhost:5000/register
 Content-Type: application/json
 
 {
-  "username": "doctor1",
+  "first_name": "John",
+  "last_name": "Doe",
+  "username": "johndoe",
   "password": "password123"
 }
 
-### 2. Login Doctor
-POST http://127.0.0.1:5000/login
+###
+
+### Login and get token
+POST http://localhost:5000/login
 Content-Type: application/json
 
 {
-  "username": "doctor1",
+  "username": "johndoe",
   "password": "password123"
 }
 
-### 3. Create Program
-POST http://127.0.0.1:5000/programs
+### Create a new client
+POST http://localhost:5000/clients
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NTY2Mjc0NiwianRpIjoiYmU1ODJmMzYtOTk4NC00MDMwLTk3MmUtN2YwYTMyYTYzN2QzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImRvY3RvcjEiLCJuYmYiOjE3NDU2NjI3NDYsImNzcmYiOiJkYTkyNWY0YS02NGRkLTRjZjAtODg0NS0wNDVjMjQ4ZmYyNmYiLCJleHAiOjE3NDU2NjM2NDZ9.gCMjUz16HEb9rfMAprWcrjxxJkI93BTKy6O1uF1ffus
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NTc1ODE3OSwianRpIjoiOGZjYzBkOGItNTJhOS00MThkLWFjMzctMzE4ODIyZDAyMzE3IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImpvaG5kb2UiLCJuYmYiOjE3NDU3NTgxNzksImNzcmYiOiJmZWNlNWU1OS04MDYzLTRhOGEtODFmMS0wNjFkZDg5NGZhOGIiLCJleHAiOjE3NDU3NTkwNzl9.5TcBEipQTpwQSUPQr_Jjc-jLxCYtj5GBsABcbGobqSY
 
 {
-  "name": "HIV Program"
+  "first_name": "Alice",
+  "last_name": "Smith",
+  "age": 30,
+  "huduma_number": "12345678"
 }
 
-### 4. Create Client
-POST http://127.0.0.1:5000/clients
+###
+
+### List all clients
+GET http://localhost:5000/clients
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NTc1ODE3OSwianRpIjoiOGZjYzBkOGItNTJhOS00MThkLWFjMzctMzE4ODIyZDAyMzE3IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImpvaG5kb2UiLCJuYmYiOjE3NDU3NTgxNzksImNzcmYiOiJmZWNlNWU1OS04MDYzLTRhOGEtODFmMS0wNjFkZDg5NGZhOGIiLCJleHAiOjE3NDU3NTkwNzl9.5TcBEipQTpwQSUPQr_Jjc-jLxCYtj5GBsABcbGobqSY
+
+###
+
+### Get a specific client by ID
+GET http://localhost:5000/clients/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NTc1ODE3OSwianRpIjoiOGZjYzBkOGItNTJhOS00MThkLWFjMzctMzE4ODIyZDAyMzE3IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImpvaG5kb2UiLCJuYmYiOjE3NDU3NTgxNzksImNzcmYiOiJmZWNlNWU1OS04MDYzLTRhOGEtODFmMS0wNjFkZDg5NGZhOGIiLCJleHAiOjE3NDU3NTkwNzl9.5TcBEipQTpwQSUPQr_Jjc-jLxCYtj5GBsABcbGobqSY
+
+###
+
+### Create a new program
+POST http://localhost:5000/programs
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NTY5ODk4NCwianRpIjoiZTAxMmZjNjktNmUxMy00ODc5LTg1ZjgtM2MwNzg5NTNkNTJkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImRvY3RvcjEiLCJuYmYiOjE3NDU2OTg5ODQsImNzcmYiOiI1OWQxY2Y0OS1lZjQzLTQ0ZjQtYTNjZC1kMjVkMmQzYzY1NDEiLCJleHAiOjE3NDU2OTk4ODR9.DiQByIzvZwQ24supDs6MkSvlbKssDH97fXn9LYiSUpk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NTc1ODE3OSwianRpIjoiOGZjYzBkOGItNTJhOS00MThkLWFjMzctMzE4ODIyZDAyMzE3IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImpvaG5kb2UiLCJuYmYiOjE3NDU3NTgxNzksImNzcmYiOiJmZWNlNWU1OS04MDYzLTRhOGEtODFmMS0wNjFkZDg5NGZhOGIiLCJleHAiOjE3NDU3NTkwNzl9.5TcBEipQTpwQSUPQr_Jjc-jLxCYtj5GBsABcbGobqSY
 
 {
-  "name": "John Doe",
-  "age": 32
+  "name": "HIV",
+  "description": "Virus"
 }
 
-### 5. List Clients
-GET http://127.0.0.1:5000/clients
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NTY5ODk4NCwianRpIjoiZTAxMmZjNjktNmUxMy00ODc5LTg1ZjgtM2MwNzg5NTNkNTJkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImRvY3RvcjEiLCJuYmYiOjE3NDU2OTg5ODQsImNzcmYiOiI1OWQxY2Y0OS1lZjQzLTQ0ZjQtYTNjZC1kMjVkMmQzYzY1NDEiLCJleHAiOjE3NDU2OTk4ODR9.DiQByIzvZwQ24supDs6MkSvlbKssDH97fXn9LYiSUpk
+###
 
-### 6. Enroll Client
-POST http://127.0.0.1:5000/enroll
+### List all programs
+GET http://localhost:5000/programs
+Authorization: Bearer {{token}}
+
+###
+
+### Enroll a client into a program
+POST http://localhost:5000/enroll
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NTY5ODk4NCwianRpIjoiZTAxMmZjNjktNmUxMy00ODc5LTg1ZjgtM2MwNzg5NTNkNTJkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImRvY3RvcjEiLCJuYmYiOjE3NDU2OTg5ODQsImNzcmYiOiI1OWQxY2Y0OS1lZjQzLTQ0ZjQtYTNjZC1kMjVkMmQzYzY1NDEiLCJleHAiOjE3NDU2OTk4ODR9.DiQByIzvZwQ24supDs6MkSvlbKssDH97fXn9LYiSUpk
+Authorization: Bearer {{token}}
 
 {
   "client_id": 1,
   "program_id": 1
 }
 
-### 7. View Client Profile
-GET http://127.0.0.1:5000/clients/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NTY5ODk4NCwianRpIjoiZTAxMmZjNjktNmUxMy00ODc5LTg1ZjgtM2MwNzg5NTNkNTJkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImRvY3RvcjEiLCJuYmYiOjE3NDU2OTg5ODQsImNzcmYiOiI1OWQxY2Y0OS1lZjQzLTQ0ZjQtYTNjZC1kMjVkMmQzYzY1NDEiLCJleHAiOjE3NDU2OTk4ODR9.DiQByIzvZwQ24supDs6MkSvlbKssDH97fXn9LYiSUpk
+###
 
-### 8. Add Outcome
-POST http://127.0.0.1:5000/outcomes
+### Add an outcome for a client
+POST http://localhost:5000/outcomes
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NTY5ODk4NCwianRpIjoiZTAxMmZjNjktNmUxMy00ODc5LTg1ZjgtM2MwNzg5NTNkNTJkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImRvY3RvcjEiLCJuYmYiOjE3NDU2OTg5ODQsImNzcmYiOiI1OWQxY2Y0OS1lZjQzLTQ0ZjQtYTNjZC1kMjVkMmQzYzY1NDEiLCJleHAiOjE3NDU2OTk4ODR9.DiQByIzvZwQ24supDs6MkSvlbKssDH97fXn9LYiSUpk
-
+Authorization: Bearer {{token}}
 
 {
   "client_id": 1,
   "program_id": 1,
-  "outcome": "Completed treatment",
-  "notes": "Patient has fully recovered."
+  "outcome": "Improved weight management",
+  "notes": "Client showed improvement after 3 months."
 }
 
-### Get Activity Logs
+###
+
+### View activity logs
 GET http://localhost:5000/logs
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NTY5ODk4NCwianRpIjoiZTAxMmZjNjktNmUxMy00ODc5LTg1ZjgtM2MwNzg5NTNkNTJkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImRvY3RvcjEiLCJuYmYiOjE3NDU2OTg5ODQsImNzcmYiOiI1OWQxY2Y0OS1lZjQzLTQ0ZjQtYTNjZC1kMjVkMmQzYzY1NDEiLCJleHAiOjE3NDU2OTk4ODR9.DiQByIzvZwQ24supDs6MkSvlbKssDH97fXn9LYiSUpk
-Content-Type: application/json
+Authorization: Bearer {{token}}
