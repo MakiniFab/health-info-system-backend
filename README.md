@@ -1,4 +1,4 @@
-🏥 Health Information System Backend
+# Health Information System Backend
 This is the backend for a basic Health Information System built as part of a Software Engineering Intern Task.
 It allows doctors to manage clients, enroll them into health programs, track outcomes, and expose client profiles via a clean API.
 
@@ -78,8 +78,9 @@ Unit and integration tests (pytest + Flask testing client)
 
 Admin dashboard interface
 
-Deployment to Render or Railway (with environment configs)
+Deployed to Render.
+Accessible via the url "https://health-info-system-backend.onrender.com"
 
 👨‍💻 Author
-[Your Name]
+Farbean Makini
 Software Engineer passionate about backend architecture, clean API design, and secure systems.
